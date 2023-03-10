@@ -7,7 +7,7 @@ import pom.BasePom;
 
 public class LoginPage extends BasePom {
 
-    @FindBy (xpath = "//div[@role='alert']/h4")
+    @FindBy(xpath = "//div[@role='alert']/h4")
     WebElement attentionMessage;
 
     @FindBy(xpath = "//input[@name='username']")
@@ -20,37 +20,29 @@ public class LoginPage extends BasePom {
     WebElement singInButton;
 
 
-public String getAttentionMessage(){
-    return baseMethods.getText(attentionMessage);
-}
+    public String getAttentionMessage() {
+        return baseMethods.getText(attentionMessage);
+    }
 
-public LoginPage getInputField(){
-    baseMethods.waitElementToBeClickableAndVisible(userNameField);
-    return this;
-}
+    public LoginPage getInputField() {
+        baseMethods.waitElementToBeClickableAndVisible(userNameField);
+        return this;
+    }
 
-public LoginPage enterUserName(String str){
-    baseMethods.sendKeys(userNameField,str);
-    return this;
-}
+    public LoginPage enterUserName(String str) {
+        baseMethods.sendKeys(userNameField, str);
+        return this;
+    }
 
-public LoginPage enterPassword(String str){
-    baseMethods.sendKeys(passwordField, str);
-    return this;
-}
-public LoginPage clickOnSignInButton(){
-    baseMethods.click(singInButton);
-    return this;
-}
+    public LoginPage enterPassword(String str) {
+        baseMethods.sendKeys(passwordField, str);
+        return this;
+    }
 
-
-
-
-
-
-
-
-
+    public LoginPage clickOnSignInButton() {
+        baseMethods.click(singInButton);
+        return this;
+    }
 
 
 }

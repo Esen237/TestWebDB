@@ -15,11 +15,20 @@ import java.sql.SQLException;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CBS_MusteriBean {
+    public static CBS_MusteriBean cbs_musteriBean = CBS_MusteriBean.getRandomRow();
+
 
     String MUSTERI_NO;
+    String VERGI_NO;
+    String SOYADI;
+    String ISIM;
+    String IKINCI_ISIM;
+    String DOGUM_TARIHI;
+
+
+
 
     public CBS_MusteriBean(){
-
     }
     public static int getNumberOfRecords() throws SQLException {
         String query = "select count(*) from cbs_musteri";

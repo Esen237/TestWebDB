@@ -1,7 +1,6 @@
 package dataBase.dbUtils;
 
 
-import dataBase.beans.CBS_Erisim_RolBean;
 import dataBase.beans.CBS_MusteriBean;
 import dataProviders.ConfigReader;
 import oracle.jdbc.driver.OracleConnection;
@@ -10,7 +9,7 @@ import java.sql.*;
 import java.util.Properties;
 
 public class JDBCOracle extends BeansClasses {
-    private static Connection connection;
+
     final static String DB_URL = ConfigReader.getProperty("dataBaseURL");
     final static String DB_USER = ConfigReader.getProperty("dbUserName");
     final static String DB_PASSWORD = ConfigReader.getProperty("dbPassword");
@@ -31,9 +30,12 @@ public class JDBCOracle extends BeansClasses {
         return connection;
     }
 
-    public static void createConnection() {
-        connection = connect();
-    }
+
+//    public static void createConnection(){
+//        connection = connect();
+//    }
+
+    private static Connection connection = connect();
 
     public static ResultSet query(String sqlQuery) {
         Connection connection = JDBCOracle.connection;
@@ -46,7 +48,7 @@ public class JDBCOracle extends BeansClasses {
 
 
     public static void main(String[] args) {
-        createConnection();
+//        createConnection();
 //        CBS_Erisim_RolBeaqn random = CBS_Erisim_RolBean.getRandomRow();
 //        System.out.println(random.getERISIM_KULLANICI_KODU());
 //        System.out.println(random.getROL_NUMARA());
@@ -54,7 +56,11 @@ public class JDBCOracle extends BeansClasses {
 //        CBS_MusteriBean random1 = CBS_MusteriBean.getRandomRow();
 //        System.out.println(random1.getMUSTERI_NO());
 //        int a = CBS_MusteriBean.getRandomRow();
-        System.out.println(CBS_MusteriBean.getRandomRow().getMUSTERI_NO());
+//        CBS_MusteriBean random = CBS_MusteriBean.getRandomRow();
+        System.out.println(CBS_MusteriBean.cbs_musteriBean.getMUSTERI_NO());
+        System.out.println(CBS_MusteriBean.cbs_musteriBean.getDOGUM_TARIHI());
+//        System.out.println(CBS_MusteriBean.getRandomRow().getMUSTERI_NO());
+//        System.out.println(CBS_MusteriBean.getRandomRow().getDOGUM_TARIHI());
 
 //        CBS_MusteriBean cbsMusteriBean = new CBS_MusteriBean();
 //        CBS_MusteriBean random1 = cbsMusteriBean.getRandomRow();

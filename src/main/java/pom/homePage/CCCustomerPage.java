@@ -7,8 +7,11 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import pom.BasePom;
 
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class CCCustomerPage extends BasePom {
 
@@ -55,14 +58,38 @@ public class CCCustomerPage extends BasePom {
     private WebElement buttonINN;
 
     @FindBy(xpath = "//input[@id='inn']")
-    public WebElement iNNField;
+    private WebElement iNNField;
 
     @FindBy(xpath = "(//button[@class='btn btn-primary btn-outline waves-effect waves-light'])[3]")
-    public WebElement searchByINNButton;
+    private WebElement searchByINNButton;
+
+    @FindBy(xpath = "//a[@href='#exampleTabsFour']")
+    private WebElement fullNameButton;
+
+    @FindBy(xpath = "//input[@id='fullName']")
+    private WebElement fullNameField;
+
+    @FindBy(xpath = "//input[@id='birthDate']")
+    private WebElement birthDateField;
+
+    @FindBy(xpath = "//a[@id='adminPanel']")
+    private WebElement adminPanelButton;
+
+    @FindBy(xpath = "//input[@id='startDate']")
+    private WebElement startDateAP;
+
+    @FindBy(xpath = "//input[@id='endDate']")
+    private WebElement endDateAP;
+
+    @FindBy(xpath = "//button[@id='showInquiryReport']")
+            private WebElement downloadReportButton;
+
+    By foundCustomersByFullName = By.xpath("/html/body/div[7]/div[2]/div[2]/div[1]/div[1]/table/tbody[2]/tr");
 
     By foundCustomersByPhone = By.xpath("/html/body/div[7]/div[2]/div[2]/div[1]/div[1]/table/tbody[2]/tr");
 
     By foundCustomersByINN = By.xpath("/html/body/div[7]/div[2]/div[2]/div[1]/div[1]/table/tbody[2]/tr");
+
 
     public CCCustomerPage clickPhoneButton() {
         baseMethods.click(phoneButton);
@@ -102,9 +129,9 @@ public class CCCustomerPage extends BasePom {
         return this;
     }
 
-    public String getRandomCustomerNo(Connection connection) throws SQLException {
-        return selectMethods.getRandomFromList(connection, ConfigReader.getProperty("sqlQueryForAllCustomerNo"), 1);
-    }
+//    public String getRandomCustomerNo() throws SQLException {
+//        return selectMethods.getRandomFromList( ConfigReader.getProperty("sqlQueryForAllCustomerNo"), 1);
+//    }
 
     public CCCustomerPage fillTheCustNoField(String customerNo) {
         baseMethods.sendKeys(customerNoField, customerNo);
@@ -116,8 +143,8 @@ public class CCCustomerPage extends BasePom {
         return this;
     }
 
-    public String getRandomCustPhone(Connection connection) throws SQLException {
-        return selectMethods.getRandomFromList(connection, ConfigReader.getProperty("sqlQueryForAllPhoneNumbers"), 2);
+    public String getRandomCustPhone() throws SQLException {
+        return selectMethods.getRandomFromList(ConfigReader.getProperty("sqlQueryForAllPhoneNumbers"), 2);
     }
 
 
@@ -131,19 +158,14 @@ public class CCCustomerPage extends BasePom {
         return this;
     }
 
-    public CCCustomerPage queryDB(Connection connection, String sqlQuery) throws SQLException {
-        selectMethods.query(connection, sqlQuery);
-        return this;
-    }
-
     public CCCustomerPage checkListOfCustsByPhone() {
         Assert.assertTrue(listMethods.getAllElements(foundCustomersByPhone).size() > 0);
         return this;
     }
 
-    public String getRandomCustINN(Connection connection) throws SQLException {
-        return selectMethods.getRandomFromList(connection, ConfigReader.getProperty("selectOfInn"), 1);
-    }
+//    public String getRandomCustINN() throws SQLException {
+//        return selectMethods.getRandomFromList( ConfigReader.getProperty("selectOfInn"), 1);
+//    }
 
     public CCCustomerPage clickINNButton() {
         baseMethods.click(buttonINN);
@@ -164,5 +186,42 @@ public class CCCustomerPage extends BasePom {
         Assert.assertTrue(listMethods.getAllElements(foundCustomersByINN).size() > 0);
         return this;
     }
+
+    public CCCustomerPage clickFullNameButton() {
+        baseMethods.click(fullNameButton);
+        return this;
+    }
+
+    public CCCustomerPage fillTheFullNameField(String fullName) {
+        baseMethods.sendKeys(fullNameField, fullName);
+        return this;
+    }
+
+    public CCCustomerPage fillTheBirthDateField(String dateOfBirthDay) throws ParseException {
+        SimpleDateFormat oldDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date date = oldDateFormat.parse(dateOfBirthDay);
+        String result = newDateFormat.format(date);
+        baseMethods.sendKeys(birthDateField, result);
+        return this;
+    }
+
+    public CCCustomerPage checkListOfCustByFullName() {
+        Assert.assertTrue(listMethods.getAllElements(foundCustomersByFullName).size() > 0);
+        return this;
+    }
+
+    public CCCustomerPage clickAdminPanelButton() {
+        baseMethods.click(adminPanelButton);
+        return this;
+    }
+
+    public CCCustomerPage checkInquiryReport(){
+        Assert.assertTrue(startDateAP.isDisplayed());
+        Assert.assertTrue(endDateAP.isDisplayed());
+        Assert.assertTrue(downloadReportButton.isDisplayed());
+        return this;
+    }
+
 
 }

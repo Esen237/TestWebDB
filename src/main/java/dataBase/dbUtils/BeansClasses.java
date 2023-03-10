@@ -15,4 +15,5 @@ public class BeansClasses {
     @Getter
     public CBS_MusteriBean cbs_musteriBean = new CBS_MusteriBean();
 
+
 }

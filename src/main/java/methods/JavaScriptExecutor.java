@@ -24,7 +24,7 @@ public class JavaScriptExecutor {
     public int getAllElementsJS() {
        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         List<WebElement> eles = (List<WebElement>) js.executeScript("var results = new Array();"
-               + "var element = document.evaluate(\"//tbody/tr[@role='row']\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);"
+               + "var element = document.evaluate(\"//tr[@role='row']\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);"
                + "for ( var i = 0 ; i < element.snapshotLength ; i++ )"
                + "{"
                +    "results.push(element.snapshotItem(i));"

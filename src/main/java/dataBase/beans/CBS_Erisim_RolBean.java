@@ -8,10 +8,8 @@ import lombok.experimental.FieldDefaults;
 import mockData.JavaFakerData;
 import org.apache.commons.dbutils.BeanProcessor;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 @Data
 @AllArgsConstructor

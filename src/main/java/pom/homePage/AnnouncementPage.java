@@ -122,8 +122,8 @@ public class AnnouncementPage extends BasePom {
         return this;
     }
 
-    public int countOfUsersWithMailDB(Connection connection) throws SQLException {
-        return selectMethods.countOfSQLQuery(connection, ConfigReader.getProperty("selectOfUsersWithMail"), 1);
+    public int countOfUsersWithMailDB() throws SQLException {
+        return selectMethods.countOfSQLQuery(ConfigReader.getProperty("selectOfUsersWithMail"), 1);
     }
 
     public int numberOfUsersWithMail() {
